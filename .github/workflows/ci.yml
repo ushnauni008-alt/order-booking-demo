@@ -1,0 +1,38 @@
+name: Order Booking CI Validation
+
+on:
+  push:
+    branches: 
+    - main
+    - feature/*
+
+  pull_request: 
+    branches: 
+    - main
+    - feature/*
+  workflow_dispatch:
+
+permissions: 
+  contents: read
+
+jobs:
+  validate-application:
+    name: Validate Order Booking Application 
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Validate Python syntax
+        run: python -m py_compile main.py load_test.py
+        
+    
