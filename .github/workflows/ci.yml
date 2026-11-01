@@ -41,7 +41,7 @@ jobs:
       - name: Build Docker image
         uses: docker/build-push-action@v7.4.0
         with:
-          context:
+          context: .
           push: false
           tags: order-booking-demo:latest
       
